@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags  %}
+{% block content %}
+
+<div class="container m-3">
+    <a href="{% url 'edit_profile' request.user.id %}" class="btn btn-primary">edit profile</a>
+</div>
+
+<hr>
+
+<div class="container text-center ">
+    <h4> Brought Car List: </h4>
+    <div class="row d-flex justify-content-between align-items-center">
+        {% for i in cars %}<div class="col-3">
+        <div class="card mt-3" style="width: 18rem;">
+            <img src="{{i.image.url}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Car Name: {{i.name}}</h5>
+              <h6 class="card-text">Car Price: {{i.price}} </h6>
+              <h6 class="card-text">Car Brand: {{i.brand.name}} </h6>
+            <a href="{% url 'detail_post' i.id %}" class="btn btn-primary"><b>Car Details</b></a>
+            </div>
+        </div> </div>
+        {% endfor %}
+    </div>
+</div> 
+{% comment %} {% for car in cars %}
+    <div class="row">
+        <div class="col-6 m-auto">
+            <img src="{{ car.image.url }}" class="card-img-top" alt="Car Image">
+        </div>
+        <div class="col-6">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h6 class="card-title"> <b>Car Name:</b> {{ car.name }}</h6>
+                    <h6 class="card-text"><b>Car Price:</b> {{ car.price }} </h6>
+                    <h6 class="card-text"><b>Car Quantity:</b> {{ car.quantity }} </h6>
+                    <h6 class="card-text"><b>Car Description: </b>{{ car.description }} </h6>
+                    <h6 class="card-text"><b>Car Brand:</b> {{ car.brand.name }} </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endfor %} {% endcomment %}
+
+
+{% endblock %}

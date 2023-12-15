@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<b><h1>Home Page</h1></b>
+<hr>
+{% if messages %}
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+        <div class="toast-header">
+            <strong class="me-auto">Congratulations</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            {% for message in messages %}
+                <p {% if message.tags %} class="{{message.tags}}" {%endif%} >{{ message }}</p>   
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+
+
+
+
+<script>
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function(toastEl) {
+        return new bootstrap.Toast(toastEl)
+    })
+    if (toastList.length > 0) {
+        toastList.forEach(toast => toast.show())
+    }
+</script>
+{% endblock %}
